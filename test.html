@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pindah Tampilan</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin: 20px; background-color: #f4f4f4; }
+        .container { max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0px 0px 10px rgba(0,0,0,0.1); }
+        .hidden { display: none; }
+        .disabled { pointer-events: none; opacity: 0.5; }
+        header { text-align: center; margin-bottom: 20px; }
+        img { width: 100px; height: 100px; border-radius: 50%; }
+    </style>
+</head>
+<body>
+    <header>
+        <h2>Samuel Jeremiah Hasitawan Serang</h2>
+        <p>235314009</p>
+        <img src="Moon copy.jpg">
+    </header>
+    
+    <div class="container">
+        <div id="formSection">
+            <label>Nama : <input type="text" id="nama"></label><br><br>
+            <label>Jumlah pilihan : <input type="number" id="jumlah"></label><br><br>
+            <button onclick="showInputs()">OK</button>
+        </div>
+        
+        <div id="inputSection" class="hidden">
+            <h2>Masukkan Teks Pilihan:</h2>
+            <div id="inputList"></div>
+            <button onclick="showSelection()">OK</button>
+        </div>
+        
+        <div id="selectionSection" class="hidden">
+            <h2>Pilih Salah Satu:</h2>
+            <div id="radioList"></div>
+            <br>
+            <label for="dropdown">Atau pilih dari dropdown:</label>
+            <select id="dropdown"></select>
+            <br><br>
+            <button onclick="showResult()">Submit</button>
+        </div>
+        
+        <div id="resultSection">
+            <p id="resultText"></p>
+        </div>
+    </div>
+
+    <script>
+        function showInputs() {
+            let nama = document.getElementById("nama").value.trim();
+            let jumlah = parseInt(document.getElementById("jumlah").value);
+            let formSection = document.getElementById("formSection");
+            let inputSection = document.getElementById("inputSection");
+            let inputList = document.getElementById("inputList");
+            
+            if (nama === "" || isNaN(jumlah) || jumlah < 1 || jumlah > 10) {
+                alert("Harap isi Nama dan pilih jumlah antara 1-10.");
+                return;
+            }
+            
+            inputList.innerHTML = "";
+            for (let i = 1; i <= jumlah; i++) {
+                let div = document.createElement("div");
+                div.innerHTML = `Pilihan ${i}: <input type='text' id='pilihan${i}' required>`;
+                inputList.appendChild(div);
+            }
+            
+            formSection.classList.add("disabled");
+            inputSection.classList.remove("hidden");
+        }
+        
+        function showSelection() {
+            let jumlah = parseInt(document.getElementById("jumlah").value);
+            let inputSection = document.getElementById("inputSection");
+            let selectionSection = document.getElementById("selectionSection");
+            let radioList = document.getElementById("radioList");
+            let dropdown = document.getElementById("dropdown");
+            
+            radioList.innerHTML = "";
+            dropdown.innerHTML = "";
+            
+            for (let i = 1; i <= jumlah; i++) {
+                let inputField = document.getElementById(`pilihan${i}`);
+                let text = inputField.value.trim();
+                if (text === "") {
+                    alert("Harap isi semua pilihan sebelum melanjutkan.");
+                    return;
+                }
+                
+                let div = document.createElement("div");
+                div.innerHTML = `<input type='radio' name='pilihan' value='${text}'> ${text}`;
+                radioList.appendChild(div);
+                
+                let option = document.createElement("option");
+                option.value = text;
+                option.textContent = text;
+                dropdown.appendChild(option);
+            }
+            
+            inputSection.classList.add("disabled");
+            selectionSection.classList.remove("hidden");
+        }
+        
+        function showResult() {
+            let nama = document.getElementById("nama").value;
+            let jumlah = parseInt(document.getElementById("jumlah").value);
+            let selectedRadio = document.querySelector("input[name='pilihan']:checked");
+            let selectedDropdown = document.getElementById("dropdown").value;
+            let resultSection = document.getElementById("resultSection");
+            let resultText = document.getElementById("resultText");
+            
+            let pilihanList = [];
+            for (let i = 1; i <= jumlah; i++) {
+                pilihanList.push(document.getElementById(`pilihan${i}`).value);
+            }
+            
+            let selectedChoice = selectedRadio ? selectedRadio.value : selectedDropdown;
+            
+            if (!selectedChoice) {
+                alert("Harap pilih salah satu pilihan.");
+                return;
+            }
+            
+            /*  */
+            resultText.innerHTML = `Hallo, nama saya ${nama}, saya mempunyai sejumlah ${jumlah} pilihan yaitu ${pilihanList.join(", ")}, dan saya memilih ${selectedChoice}.`;
+            
+            /* Menyembuyikan halaman awal dan tengah */
+            formSection.classList.add("hidden"); 
+            inputSection.classList.add("hidden");
+            selectionSection.classList.add("hidden");
+        }
+    </script>
+</body>
+</html>

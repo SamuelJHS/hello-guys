@@ -1,0 +1,36 @@
+div#p1{
+  width: 100px;
+  height: 100px;
+  background-color:red;
+  position: relative;
+  animation-name: example;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+}
+
+div#dd{
+  width: 100px;
+  height: 100px;
+  background-color: aliceblue;
+  position:relative;
+  animation-name: muter;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  
+}
+
+@keyframes muter {
+  0%   {animation:red; rotate: 0deg;}
+  25%   {animation:yellow; rotate: 90deg;}
+  50%   {animation:blue; rotate: 180deg;}
+  75%   {animation:green; rotate: 270deg;}
+  100%   {animation:pink; rotate: 360deg;}
+}
+
+@keyframes example {
+  0%   {background-color:red; rotate: 0deg;}
+  25%  {background-color:yellow; rotate: 90deg;}
+  50%  {background-color:blue; rotate: 180deg;}
+  75%  {background-color:green; rotate: 270deg;}
+  100% {background-color:red; rotate: 360deg;}
+}
