@@ -1,0 +1,13 @@
+.hidden { display: none; } /* menyembunyikan halaman */
+.disabled { pointer-events: none; opacity: 0.5; } /* disabled teks */
+
+
+.konten1{
+    width: 360px;
+    padding: 20px;
+    border: 2px black;
+    border-radius: 10px;
+    background-color:limegreen;
+    margin: 50px auto; /* auto center */
+    text-align: left; /* membat tulisan panduan input ke kiri */
+}

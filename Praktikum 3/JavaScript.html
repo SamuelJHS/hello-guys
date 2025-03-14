@@ -1,0 +1,43 @@
+<html>
+<head>
+    <title>Latihan Java Script</title>
+    <link rel="stylesheet" href="StyleJS.css">
+</head>
+<body>
+    <header>
+        <h2>Samuel Jeremiah Hasitawan Serang</h2>
+        <p>235314009</p>
+        <img src="Moon.jpg">
+    </header>
+    
+    <div class="container">
+        <div id="formSection">
+            Nama : <input type="text" id="nama"><br><br>
+            <label>Jumlah pilihan : <input type="number" id="jumlah"></label><br><br>
+            <button onclick="showInputs()">OK</button>
+        </div>
+        
+        <div id="inputSection" class="hidden">
+            <h2>Masukkan Teks Pilihan:</h2>
+            <div id="inputList"></div>
+            <button onclick="showSelection()">OK</button>
+        </div>
+        
+        <div id="selectionSection" class="hidden">
+            <h2>Pilih Salah Satu:</h2>
+            <div id="radioList"></div>
+            <br>
+            <label for="dropdown">Atau pilih dari dropdown:</label>
+            <select id="dropdown"></select>
+            <br><br>
+            <button onclick="showResult()">Submit</button>
+        </div>
+        
+        <div id="resultSection">
+            <p id="resultText"></p>
+        </div>
+    </div>
+<script src="Js.js"></script>
+
+</body>
+</html>
